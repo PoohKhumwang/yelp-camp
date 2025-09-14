@@ -56,7 +56,7 @@ const store = MongoStore.create({
 store.on("error", function (err) {
   console.log("SESSION STORE ERROR", err);
 });
-
+app.set("trust proxy", 1);
 const sessionConfig = {
   store,
   name: "session",
@@ -65,7 +65,7 @@ const sessionConfig = {
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    secure: false,
+    secure: true,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
