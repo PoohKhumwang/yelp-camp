@@ -113,6 +113,7 @@ app.use(
         "'self'",
         "https://api.maptiler.com/",
         "https://cdn.jsdelivr.net",
+        "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css.map",
       ],
       scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
