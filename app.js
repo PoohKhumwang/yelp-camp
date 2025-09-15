@@ -99,6 +99,7 @@ const connectSrcUrls = [
   // "https://a.tiles.mapbox.com/",
   // "https://b.tiles.mapbox.com/",
   // "https://events.mapbox.com/",
+  "https://cdn.jsdelivr.net",
   "https://api.maptiler.com/", // add this
 ];
 
@@ -107,21 +108,25 @@ const fontSrcUrls = [];
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: [],
-      connectSrc: ["'self'", ...connectSrcUrls],
+      defaultSrc: ["'self'", "https://cdn.jsdelivr.net"],
+      connectSrc: [
+        "'self'",
+        "https://api.maptiler.com/",
+        "https://cdn.jsdelivr.net",
+      ],
       scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-      styleSrc: ["*"],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
       workerSrc: ["'self'", "blob:"],
       childSrc: ["blob:"],
       objectSrc: [],
       imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        "https://res.cloudinary.com/dpq0yg9oi/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        // "https://images.unsplash.com",
+        "https://api.maptiler.com/",
         "*",
-        // "'self'",
-        // "blob:",
-        // "data:",
-        // "https://res.cloudinary.com/dpq0yg9oi/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
-        // // "https://images.unsplash.com",
-        // "https://api.maptiler.com/",
       ],
       fontSrc: ["'self'", ...fontSrcUrls],
     },

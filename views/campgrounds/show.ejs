@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/star.css" />
 <div class="row w-75 mx-auto">
   <div class="col-6">
     <div
@@ -166,11 +167,10 @@
     </div>
     <% } %>
   </div>
-
-  <script>
-    const mapToken = "<%-process.env.MAPTILER_API_KEY %>";
-    const campground = <%- JSON.stringify(campground)%>
-  </script>
-
-  <script src="/javascripts/showPageMap.js"></script>
 </div>
+<script>
+  const mapToken = "<%-process.env.MAPTILER_API_KEY %>";
+  const campground = <%- JSON.stringify(campground)%>
+</script>
+
+<script src="/javascripts/showPageMap.js"></script>
