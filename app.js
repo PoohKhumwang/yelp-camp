@@ -110,7 +110,7 @@ app.use(
       defaultSrc: [],
       connectSrc: ["'self'", ...connectSrcUrls],
       scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      styleSrc: ["*"],
       workerSrc: ["'self'", "blob:"],
       childSrc: ["blob:"],
       objectSrc: [],
