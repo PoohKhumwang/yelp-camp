@@ -106,32 +106,35 @@ const connectSrcUrls = [
 const fontSrcUrls = [];
 
 app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'", "https://cdn.jsdelivr.net"],
-      connectSrc: [
-        "'self'",
-        "https://api.maptiler.com/",
-        "https://cdn.jsdelivr.net",
-        "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css.map",
-      ],
-      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-      workerSrc: ["'self'", "blob:"],
-      childSrc: ["blob:"],
-      objectSrc: [],
-      imgSrc: [
-        "'self'",
-        "blob:",
-        "data:",
-        "https://res.cloudinary.com/dpq0yg9oi/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
-        // "https://images.unsplash.com",
-        "https://api.maptiler.com/",
-        "*",
-      ],
-      fontSrc: ["'self'", ...fontSrcUrls],
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'", "https://cdn.jsdelivr.net"],
+        connectSrc: [
+          "'self'",
+          "https://api.maptiler.com/",
+          "https://cdn.jsdelivr.net",
+        ],
+        scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+        styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+        workerSrc: ["'self'", "blob:"],
+        childSrc: ["blob:"],
+        objectSrc: [],
+        imgSrc: [
+          "'self'",
+          "blob:",
+          "data:",
+          "https://res.cloudinary.com/dpq0yg9oi/",
+          "https://api.maptiler.com/",
+          "*",
+        ],
+        fontSrc: ["'self'", ...fontSrcUrls],
+      },
     },
-  })
+    //-------------------------------
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  }),
 );
 
 app.use(passport.initialize());
