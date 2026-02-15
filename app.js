@@ -20,8 +20,8 @@ const sanitizeV5 = require("./utils/mongoSanitizeV5.js");
 const userRoutes = require("./routes/users");
 const campgroundsRoutes = require("./routes/campground");
 const reviewsRoutes = require("./routes/review");
-const dbUrl = process.env.DB_URL;
-// const dbUrl = "mongodb://localhost:27017/yelp-camp";
+
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
 
 mongoose.connect(dbUrl, {});
 
@@ -77,30 +77,22 @@ app.use(helmet());
 
 const scriptSrcUrls = [
   "https://stackpath.bootstrapcdn.com/",
-  // "https://api.tiles.mapbox.com/",
-  // "https://api.mapbox.com/",
   "https://kit.fontawesome.com/",
   "https://cdnjs.cloudflare.com/",
   "https://cdn.jsdelivr.net",
-  "https://cdn.maptiler.com/", // add this
+  "https://cdn.maptiler.com/",
 ];
 const styleSrcUrls = [
   "https://kit-free.fontawesome.com/",
   "https://stackpath.bootstrapcdn.com/",
-  // "https://api.mapbox.com/",
-  // "https://api.tiles.mapbox.com/",
   "https://fonts.googleapis.com/",
   "https://use.fontawesome.com/",
   "https://cdn.jsdelivr.net",
-  "https://cdn.maptiler.com/", // add this
+  "https://cdn.maptiler.com/",
 ];
 const connectSrcUrls = [
-  // "https://api.mapbox.com/",
-  // "https://a.tiles.mapbox.com/",
-  // "https://b.tiles.mapbox.com/",
-  // "https://events.mapbox.com/",
   "https://cdn.jsdelivr.net",
-  "https://api.maptiler.com/", // add this
+  "https://api.maptiler.com/",
 ];
 
 const fontSrcUrls = [];
@@ -110,11 +102,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'", "https://cdn.jsdelivr.net"],
-        connectSrc: [
-          "'self'",
-          "https://api.maptiler.com/",
-          "https://cdn.jsdelivr.net",
-        ],
+        connectSrc: ["'self'", ...connectSrcUrls],
         scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
         styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
         workerSrc: ["'self'", "blob:"],
@@ -131,9 +119,6 @@ app.use(
         fontSrc: ["'self'", ...fontSrcUrls],
       },
     },
-    //-------------------------------
-    crossOriginEmbedderPolicy: false,
-    crossOriginResourcePolicy: { policy: "cross-origin" },
   }),
 );
 
