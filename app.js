@@ -95,7 +95,7 @@ const connectSrcUrls = [
   "https://api.maptiler.com/",
 ];
 
-const fontSrcUrls = [];
+const fontSrcUrls = ["https://api.maptiler.com/"];
 
 app.use(
   helmet({
